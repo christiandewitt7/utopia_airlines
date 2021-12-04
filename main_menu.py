@@ -1,2 +1,21 @@
+def welcome_message():
+    print("Welcome to the Utopia Airlines Management System. Which category of a user are you?")
+
+
+def user_category_options():
+    print("1 Employee/Agent")
+    print("2 Administrator")
+    print("3 Traveler")
+
+
+def input_from_user():
+    print("Select number: ")
+    answer = input()
+    return answer
+
+
 if __name__ == '__main__':
-    print("Hello World")
+    welcome_message()
+    user_category_options()
+    response = (input_from_user())
+    print(response)
