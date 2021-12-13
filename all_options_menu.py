@@ -1,3 +1,5 @@
+import dao_airport
+
 def input_from_user():
     print("Select number: ")
     answer = int(input())
@@ -12,10 +14,6 @@ def flights_options_menu():
     flights_options_response = input_from_user()
     print(flights_options_response)
 
-def input_from_user():
-    print("Select number: ")
-    answer = int(input())
-    return answer
 
 def seats_options_menu():
     print("Please select from one of the four options:\n")
@@ -26,10 +24,6 @@ def seats_options_menu():
     seats_options_response = input_from_user()
     print(seats_options_response)
 
-def input_from_user():
-    print("Select number: ")
-    answer = int(input())
-    return answer
 
 def tickets_and_passengers_options_menu():
     print("Please select from one of the four options:\n")
@@ -40,10 +34,6 @@ def tickets_and_passengers_options_menu():
     tickets_and_passengers_options_response = input_from_user()
     print(tickets_and_passengers_options_response)
 
-def input_from_user():
-    print("Select number: ")
-    answer = int(input())
-    return answer
 
 def airports_options_menu():
     print("Please select from one of the four options:\n")
@@ -52,12 +42,11 @@ def airports_options_menu():
     print("3) Delete")
     print("4) Read")
     airports_options_response = input_from_user()
-    print(airports_options_response)
+    if airports_options_response == 3:
+        dao_airport.delete_airports()
+    if airports_options_response == 4:
+        dao_airport.read_all_airports()
 
-def input_from_user():
-    print("Select number: ")
-    answer = int(input())
-    return answer
 
 def travelers_options_menu():
     print("Please select from one of the four options:\n")
@@ -68,10 +57,6 @@ def travelers_options_menu():
     travelers_options_response = input_from_user()
     print(travelers_options_response)
 
-def input_from_user():
-    print("Select number: ")
-    answer = int(input())
-    return answer
 
 def employees_options_menu():
     print("Please select from one of the four options:\n")
@@ -81,11 +66,6 @@ def employees_options_menu():
     print("4) Read")
     employees_options_response = input_from_user()
     print(employees_options_response)
-
-def input_from_user():
-    print("Select number: ")
-    answer = int(input())
-    return answer
 
 def override_options_menu():
     print("Please select from one of the four options:\n")
