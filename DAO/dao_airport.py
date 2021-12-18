@@ -1,6 +1,6 @@
-import os
-import traceback
-import jaydebeapi
+import os  # operating system....so that my password doesnt have to show
+import traceback # error tracing library that prints out errors to your command line.
+import jaydebeapi  # some sort of SQL connector
 
 #from utopia_airlines.main_menu import int_from_user, input_from_user
 from utopia_airlines.models.airports import Airports
@@ -25,21 +25,24 @@ def connect():
 
 
 def read_all_airports():
-    conn = connect()
-    cursor = conn.cursor()
-    read_airports = "SELECT * FROM utopia.airport;"
-    cursor.execute(read_airports)
-    airports_tuple = cursor.fetchall()
+    conn = connect()   # connecting the database
+    cursor = conn.cursor() # cursor is the SQL tool
+    read_airports = "SELECT * FROM utopia.airport;"  # SQL query to select all airports
+    cursor.execute(read_airports) # runs the SQL query
+    airports_sql_data_tuple = cursor.fetchall() # look up cursor statements
     menu_number = 1
-    airport_objects = []
-    for airport in airports_tuple: #printing out the menu and also returning the list of all airport objects so we can use it elsewhere
-        airport_object = Airports(airport[0], airport[1])
-        print(str(menu_number) + ": " + airport_object.iata_id + " " + airport_object.city)
+    all_airports = []
+    for airport_data in airports_sql_data_tuple: #printing out the menu and also returning the list of all airport objects so we can use it elsewhere
+        current_iata_id = airport_data[0]
+        current_city = airport_data[1]
+        current_airport = Airports(current_iata_id, current_city)
+        current_airport.print_airport(menu_number)
+        #print(str(menu_number) + ": " + current_airport.iata_id + " " + current_airport.city)
         menu_number = menu_number + 1
-        airport_objects.append(airport_object)
+        all_airports.append(current_airport)
     conn.commit()
     conn.close()
-    return airport_objects  # gives the info i want and ends the function.
+    return all_airports  # gives the info i want and ends the function.
 
 
 def delete_airports():
@@ -62,6 +65,7 @@ def add_airports():
     airport_code = input_from_user()
     print("Input the city name you want to add.")
     city_code = input_from_user()
+    # put this in a separate function >>>>if i type a duplicate entry there is currently no way to catch it...select statement from mySQL where iata_id == to airport_code...., put that object into a tuple (reference read_airports) if iata_code exists, function should just return.
     add_airports_user = "insert into airport(iata_id, city) Values(\"" + airport_code + "\", \"" + city_code + "\");"
     cursor.execute(add_airports_user)
     conn.commit()

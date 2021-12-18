@@ -1,7 +1,7 @@
 from utopia_airlines.MENUS import admin_menu
 
 
-def welcome_message():
+def show_welcome_message():
     print("\nWelcome to the Utopia Airlines Management System. Which category of a user are you?")
 
 
@@ -28,7 +28,7 @@ def input_from_user():
 
 if __name__ == '__main__':
     while True:
-        welcome_message()
+        show_welcome_message()
         user_category_options()
         response = int_from_user()
         if response == 2:
